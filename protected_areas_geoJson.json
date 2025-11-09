@@ -1,0 +1,24 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "NSG Rieselfelder Münster" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[7.649108,52.049427],
+    [ 7.630856, 52.041025],
+    [ 7.651684, 52.013189],
+    [ 7.661202, 52.024973]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "NSG Wolbecker Tiergarten" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[7.729083,51.916004],[ 7.761406,51.911181],[7.757792,51.897765],[7.734995, 51.900845]]]
+      }
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Leaflet Map - Münster Protected Sites</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { height: 100vh; }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([51.96236, 7.62571], 12); // Münster
+
+    // Add OpenStreetMap background
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add Münster marker with popup
+    var muensterMarker = L.marker([51.96236, 7.62571]).addTo(map);
+    muensterMarker.bindPopup("<b>Münster</b>").openPopup();
+
+    // Generalised polygons for protected sites (Static)
+    var emsaue = L.polygon([
+    [52.027601, 7.688935],
+    [52.028239, 7.692870],
+    [52.032394, 7.692186],
+    [52.032631, 7.684802]
+    ], {
+    color: 'purple',
+    fillColor: 'purple',
+    fillOpacity: 0.4
+    }).addTo(map);
+    emsaue.bindPopup("Naturschutzgebiet Emsaue");
+
+    var hugel = L.polygon([
+    [52.003588, 7.572981],
+    [52.009485, 7.547917],
+    [52.017488, 7.573067],
+    [52.011170, 7.580509]
+    ], {
+    color: 'red',
+    fillColor: 'red',
+    fillOpacity: 0.4
+    }).addTo(map);
+    hugel.bindPopup("Naturschutzgebiet Vorbergs Hügel");
+
+
+    //Load stubbed GeoJSON file (dynamic)
+    fetch('protected_areas_geoJson.json')
+      .then(res => res.json())
+      .then(data => {
+        L.geoJSON(data, {
+        style: function (feature) {
+            // Different colors based on name
+            switch (feature.properties.name) {
+            case "NSG Rieselfelder Münster": return { color: "green", fillColor: "#98FB98", fillOpacity: 0.4 };
+            case "NSG Wolbecker Tiergarten": return { color: "blue", fillColor: "#ADD8E6", fillOpacity: 0.4 };
+            default: return { color: "orange", fillColor: "#FFD580", fillOpacity: 0.4 };
+            }
+        },
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.name);
+        }
+        }).addTo(map);
+        })
+        .catch(err => console.log('GeoJSON not loaded:', err));
+
+  </script>
+</body>
+</html>
