@@ -3,7 +3,7 @@
   "features": [
     {
       "type": "Feature",
-      "properties": { "name": "NSG Rieselfelder Münster" },
+      "properties": { "name": "NSGNaturschutzgebiet Rieselfelder Münster" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [[[7.649108,52.049427],
@@ -14,7 +14,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "name": "NSG Wolbecker Tiergarten" },
+      "properties": { "name": "Naturschutzgebiet Wolbecker Tiergarten" },
       "geometry": {
         "type": "Polygon",
         "coordinates": [[[7.729083,51.916004],[ 7.761406,51.911181],[7.757792,51.897765],[7.734995, 51.900845]]]
@@ -22,3 +22,4 @@
     }
   ]
 }
+
